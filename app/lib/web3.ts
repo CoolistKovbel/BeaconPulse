@@ -190,3 +190,31 @@ export const UsreStakingBal = async () => {
     console.log("error", error);
   }
 };
+
+export const ContractOfStake = async () => {
+  try {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    // Get the signer
+    const signer = provider.getSigner();
+    const address = await signer.getAddress()
+
+    // Contract main
+    const contractInstance = new ethers.Contract(
+      tokenSmartContract,
+      tokenAbi,
+      signer
+    );
+
+    console.log(await contractInstance.annualInterest());
+    console.log(contractInstance.annualInterest);
+    console.log(contractInstance);
+
+    //  const bal = await contractInstance;
+
+    // return  bal.toString()
+
+  } catch (error) {
+    console.log("error", error)
+  }
+}

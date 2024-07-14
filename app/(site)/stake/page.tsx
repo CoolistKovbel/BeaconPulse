@@ -4,9 +4,9 @@
 
 "use client";
 
-import { PulseContractStake, PulseContractunClaim } from "@/app/lib/web3";
+import { ContractOfStake, PulseContractStake, PulseContractunClaim } from "@/app/lib/web3";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 const Page = () => {
 
@@ -37,7 +37,7 @@ const Page = () => {
       tokenAddress: "0x",
       totalStake: 123,
       multiplier: 40,
-      apy: 123,
+      apy: "NaN",
     },
   ];
 
@@ -52,9 +52,6 @@ const Page = () => {
     const contract = await PulseContractunClaim()
     console.log(contract)
   }
-
-
-  
 
 
 
@@ -75,6 +72,16 @@ const Page = () => {
       </div>
     );
   };
+
+
+
+  const contractData = async () => {
+    await ContractOfStake()
+  }
+
+  useEffect(() => {
+    contractData()
+  },[])
 
   return (
     <main className="text-2xl font-bold">
@@ -146,7 +153,7 @@ const Page = () => {
         </div>
 
 
-          
+
 
 
       </section>
